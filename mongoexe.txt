@@ -1,0 +1,27 @@
+use student
+
+db.createCollection("personal_details",{capped:true, size:6142800,max:10000})
+
+db.personal_details.insert({rollno:1,fname:"aasif",lname:"hussain",age:20})
+
+> db.personal_details.insert({rollno:2,fname:"nikhil",lname:"s",age:21})
+
+> db.personal_details.insert({rollno:3,fname:"sujana",lname:"r",age:20})
+
+> db.personal_details.insert({rollno:4,fname:"muthusamy",lname:"a",age:21})
+
+> db.personal_details.find().pretty()
+
+db.personal_details.find({rollno:3}).pretty()
+
+db.personal_details.find({$and:[{rollno:{$lt:3}},{age:{$lte:21}}]}).pretty()
+
+db.personal_details.update({rollno:1},{$set:{rollno:5}})
+
+db.personal_details.find({},rollno:1)
+
+db.personal_details.copyTo('personal_detail')
+
+db.personal_details.drop()
+
+db.personal_detail.renameCollection('personal_details')
